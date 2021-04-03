@@ -1,0 +1,31 @@
+spring.cloud.stream:
+  function:
+    definition: processticks
+    bindings:
+      processticks-in-0:
+        destination: ticks
+      processticks-out-0:
+        destination: tick-stats-topic
+
+
+spring.cloud.stream.kafka.streams.default.producer.timestampExtractorBeanName: TickTimestampExtractor
+spring.cloud.stream.kafka.streams.default.consumer.timestampExtractorBeanName: TickTimestampExtractor
+
+spring:
+  cloud:
+    stream:
+      default:
+        standardHeaders: both
+  kafka:
+    bootstrap-servers: localhost:9092
+    streams:
+      binder:
+        applicationId: kafka-streams-ticker
+        configuration:
+          commit.interval.ms: 100
+          default:
+            key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
