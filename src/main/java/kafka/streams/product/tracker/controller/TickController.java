@@ -3,6 +3,7 @@ package kafka.streams.product.tracker.controller;
 import kafka.streams.product.tracker.TickProducer;
 import kafka.streams.product.tracker.model.Tick;
 import kafka.streams.product.tracker.model.TickStats;
+import kafka.streams.product.tracker.model.TickStatsList;
 import kafka.streams.product.tracker.service.TickService;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Windowed;
@@ -37,13 +38,16 @@ public class TickController {
 
 
     @GetMapping("/statistics")
-    public ResponseEntity<List<TickStats>> stats() {
+    public ResponseEntity<TickStatsList> stats() {
         Map<String, TickStats> retmap = tickService.stats();
-        List<TickStats>  values = null;
+        //ArrayList<TickStats>  values = null;
+        TickStatsList ret = new TickStatsList();
+
         if (retmap != null) {
-            values = new ArrayList<>(retmap.values());
+            ArrayList<TickStats>  values = new ArrayList<>(retmap.values());
+            ret.setTickStatsList(values);
         }
-        return ResponseEntity.of(Optional.ofNullable(values));
+        return ResponseEntity.of(Optional.ofNullable(ret));
     }
 
 

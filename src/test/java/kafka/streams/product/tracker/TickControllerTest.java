@@ -1,7 +1,9 @@
 package kafka.streams.product.tracker;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kafka.streams.product.tracker.model.Tick;
 import kafka.streams.product.tracker.model.TickStats;
+import kafka.streams.product.tracker.model.TickStatsList;
 import kafka.streams.product.tracker.service.TickService;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,20 +60,33 @@ public class TickControllerTest {
     @Test
     void getAllStats() throws Exception {
 
+
+        TickStatsList tslist = makeTickStatsList(tickStatsMap);
         // when
         when(tickService.stats()).thenReturn(tickStatsMap);
 
 
-        String resultJson = "[" +
-                "{\"instrument\":\"ABC\",\"min\":93.4,\"max\":110.3,\"count\":46}" +
-                ","+
-                "{\"instrument\":\"XYZ\",\"min\":10.0,\"max\":11.2,\"count\":34}]";
+        ObjectMapper om = new ObjectMapper();
+        String resultJson = om.writeValueAsString(tslist);
 
         mockMvc.perform(get(STATS_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().json(resultJson));
 
+
     }
+
+    private TickStatsList makeTickStatsList(Map<String, TickStats> tickStatsMap) {
+
+        TickStatsList ret = new TickStatsList();
+
+        ArrayList<TickStats> values = new ArrayList<>(tickStatsMap.values());
+        ret.setTickStatsList(values);
+
+        return ret;
+
+    }
+
 
     private Map<String, TickStats> buildTickStatsMap() {
 

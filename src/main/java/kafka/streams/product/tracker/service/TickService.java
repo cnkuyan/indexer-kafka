@@ -55,13 +55,6 @@ public class TickService {
 
     public ResponseEntity sendDataToKafka(Tick aTick) {
 
-        Temporal now = ZonedDateTime.now() ;
-
-        /*
-        Instant tick_ts = Instant.ofEpochMilli(aTick.getTimestamp());
-        Duration dur = Duration.between(tick_ts, now);
-
-        */
 
         Instant tickts = Instant.ofEpochMilli(aTick.getTimestamp());
         if(! is_within_window(tickts,ZonedDateTime.now(), TUMBLING_WINDOWS_SECS * MSECS_PER_SECOND)) {

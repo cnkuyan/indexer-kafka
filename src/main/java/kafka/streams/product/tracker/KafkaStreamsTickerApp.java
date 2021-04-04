@@ -47,11 +47,10 @@ public class KafkaStreamsTickerApp {
 	}
 
 
-
-	//TODO ktable.toStream.filter((key, value) -> value != null)
-	//TODO Mention Avro (binary) vs JSON
-
-
+	/**
+	 *
+	 * @return  BiFunction that takes a stream of Tick values, and outputs a stream of TickStats values
+	 */
 	@Bean
 	public Function<KStream<Object, Tick>,KStream<String,TickStats>> processticks() {
 
