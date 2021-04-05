@@ -74,7 +74,8 @@ Run maven to create jar ( Without the last parameter to run the tests at this po
 mvn clean install package -DskipTests
 ```
 
-Bring up the application 
+### Running the app:
+
 ```
 java -jar target/kafka-streams-ticker-0.0.1-SNAPSHOT.jar
 ```
