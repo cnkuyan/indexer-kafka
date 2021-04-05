@@ -59,7 +59,7 @@ git clone git@github.com:cnkuyan/indexer-kafka.git
 Go to project folder
 
 ```
-cd indexer
+cd indexer-kafka
 ```
 
 Bring up the kafka and zookeper in your local environment
