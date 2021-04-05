@@ -1,11 +1,8 @@
 # Financial Indexer with Kafka Streams
 
-This app provides an API, for the clients to query real-time price statistics of financial instruments received within the last 60 seconds (tumbling time interval), using Kafka Streams
-and Spring Cloud Streams Framework.
+This app provides an API, for the clients to query real-time price statistics of financial instruments received within the last 60 seconds (tumbling time interval), using Kafka Streams and Spring Cloud Streams Framework.
 
-The reason I wanted to provide a Kafka Streams based solution is obvious. That's because, at a larger scale  the characteristics of the problem calls for using such a scalable streaming framework.  
-( Apache Flink would've also been a great candidate) .  
-On top of that, I wanted to do it out of personal curiosity.
+The reason I wanted to provide a Kafka Streams based solution is obvious (besides personal curiosity). That's because, at a larger scale  the characteristics of the problem calls for using such a scalable streaming framework.   ( Apache Flink would've also been a great candidate) .
 
 Unfortunately the Kafka SlidingWindow feature was not officially coupled with the version of the Spring Cloud Stream framework that came with the 
 starter parent ( 2.3.4.RELEASE) .
@@ -20,10 +17,9 @@ That wasn't clearly reflected in the official documentation . Perhaps a little b
 I had to contend with TumblingWindows, instead of SlidingWindows as I would've liked to.
 
 
-
 There are three API endpoints:
 
-• POST /ticks  :  This one is called every time we receive a tick. It is also the sole input of this rest API
+• POST /ticks  :  This one is called by the clients to register a Tick. It is also the sole input of this rest API
    
 • GET /statistics : This one returns the statistics based on the ticks of all instruments of the last 60 seconds (tumbling time interval)
 
