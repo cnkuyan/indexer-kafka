@@ -50,7 +50,7 @@ https://docker.com
 
 ### Installing and Running the Tests:
 
-You have to clone repository to your local machine
+Clone repository to your local machine
 
 ```
 git clone git@github.com:cnkuyan/indexer-kafka.git
@@ -62,29 +62,33 @@ Go to project folder
 cd indexer
 ```
 
+Bring up the kafka and zookeper in your local environment
+```
+docker-compose up -d
+```
+
+
 Run maven to create jar ( Without the last parameter to run the tests at this point)
 
 ```
 mvn clean install package -DskipTests
 ```
 
-You need to bring up the kafka and zookeper in your local environment
-`docker-compose up -d`
-
- 
-
-'java -jar target/kafka-streams-ticker-0.0.1-SNAPSHOT.jar'
+Bring up the application 
+```
+java -jar target/kafka-streams-ticker-0.0.1-SNAPSHOT.jar
+```
 
 ### Interacting with the App:
 
 The following will be carried using the `curl` tool.
 
-####Sending data with curl
+#### Sending data with curl
 ```
 curl http://localhost:8080/ticks --header "Content-Type: application/json"  --request POST  --data '{ "instrument": "IBM", "timestamp": 1617473494140, "price": 130.1 }'
 ```
 
-####Querying the Statistics of all instruments:
+#### Querying the Statistics of all instruments:
 ```
 curl http://localhost:8080/statistics
 ```
