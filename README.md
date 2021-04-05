@@ -25,6 +25,13 @@ There are three API endpoints:
 
 • GET /statistics/{instrument_id} : This one returns the statistics based on the ticks of the given instrument of the last 60 seconds (tumbling time interval)
 
+
+### Configuring the Tumbling Time Window Period:
+ 
+ The application has been configured with a default value of 60 seconds for the sliding time interval.
+ In order to change it to another value,  please update the constant value TUMBLING_WINDOWS_SECS defined in KafkaStreamsTickerApp.java
+ 
+
 ### Development Assumptions 
 
  I assumed ;
@@ -43,12 +50,6 @@ There are three API endpoints:
 
  I like all kinds of challenges. I liked this one as well.
  Aside from personal pleasure, it gave me an introductory sense into the characteristics of the work that goes into the Financial Index collection and distribution .
- 
-
-### Configuring the Tumbling Time Window Period:
- 
- The application has been configured with a default value of 60 seconds for the sliding time interval.
- In order to change it to another value,  please update the constant value TUMBLING_WINDOWS_SECS defined in KafkaStreamsTickerApp.java
  
 
 ### Prerequisites:
