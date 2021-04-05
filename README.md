@@ -1,4 +1,4 @@
-#Financial Indexer with Kafka Streams
+# Financial Indexer with Kafka Streams
 
 This app provides an API, for the clients to query real-time price statistics of financial instruments received within the last 60 seconds (tumbling time interval), using Kafka Streams
 and Spring Cloud Streams Framework.
